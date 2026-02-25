@@ -23,6 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       APP_ENV: ci
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/postgres
 
     services:
       postgres:
@@ -68,8 +69,6 @@ jobs:
         run: echo "label=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
       - name: Verify DB connection target
-        env:
-          DATABASE_URL: ${{ env.DATABASE_URL }}
         run: |
           python - <<'PY'
           import os
@@ -80,8 +79,6 @@ jobs:
           PY
 
       - name: Run tests
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/postgres
         run: pytest -q --junitxml=report.xml
 
       - name: "Optional: run tests in verbose mode (allowed to fail)"
