@@ -1,0 +1,16 @@
+name: "Build Label Action"
+description: "Compute short git SHA label"
+
+outputs:
+  label:
+    description: "Short SHA"
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Compute short SHA
+      shell: bash
+      run: |
+        LABEL=$(echo "$GITHUB_SHA" | cut -c1-7)
+        echo "label=$LABEL" >> "$GITHUB_OUTPUT"
