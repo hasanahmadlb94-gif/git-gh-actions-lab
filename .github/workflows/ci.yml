@@ -58,6 +58,11 @@ jobs:
       - name: Show env
         run: echo "APP_ENV=$APP_ENV "
 
+      - name: Show masked secret length
+        env:
+          DEMO_TOKEN: ${{ secrets.DEMO_TOKEN }}
+          run: echo "Secret length is ${#DEMO_TOKEN}"
+
       - name: Compute build label
         id: meta
         run: echo "label=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
