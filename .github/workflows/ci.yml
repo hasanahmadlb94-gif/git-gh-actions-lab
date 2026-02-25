@@ -41,6 +41,10 @@ jobs:
           python -m pip install -U pip
           python -m pip install -r requirements-dev.txt
 
+      - name: Compute build label
+        id: meta
+        run: echo "label=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
       - name: Run tests
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
@@ -57,3 +61,6 @@ jobs:
         with:
           name: junit-report
           path: report.xml
+
+      - name: Show build label
+        run: echo "Build label is ${{ steps.meta.outputs.label }}"
