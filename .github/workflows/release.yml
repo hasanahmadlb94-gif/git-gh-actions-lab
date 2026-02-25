@@ -23,4 +23,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
+          body: |
+            Automated release from GitHub Actions.
+            - CI: tests + postgres integration
+            - Artifacts: junit report
+            - Custom actions: composite + docker
           files: source.zip
