@@ -129,6 +129,8 @@ jobs:
     uses: ./.github/workflows/reusable-test.yml
     with:
       label_prefix: "ci"
+    secrets:
+      demo_token: ${{ secrets.DEMO_TOKEN }}
 
   use_reusable_output:
     runs-on: ubuntu-latest
