@@ -46,6 +46,12 @@ jobs:
             ghcr.io/${{ github.repository }}:${{ github.ref_name }}
             ghcr.io/${{ github.repository }}:latest
 
+      - name: Verify pushed tags
+        run: |
+          echo "Pushed image tags:"
+          echo " - ghcr.io/${{ github.repository }}:${{ github.ref_name }}"
+          echo " - ghcr.io/${{ github.repository }}:latest"
+
       - name: Create GitHub Release and upload asset
         uses: softprops/action-gh-release@v2
         with:
