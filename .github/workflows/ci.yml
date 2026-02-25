@@ -114,3 +114,9 @@ jobs:
 
   reusable_call:
     uses: ./.github/workflows/reusable-test.yml
+
+  use_reusable_output:
+    runs-on: ubuntu-latest
+    needs: reusable_call
+    steps:
+      - run: echo "Reusable build label is ${{ needs.reusable_call.outputs.build_label }}"
