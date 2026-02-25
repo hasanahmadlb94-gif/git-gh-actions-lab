@@ -72,4 +72,5 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - run: echo "Job output label: ${{ needs.test.outputs.build_label }}"
+      - name: Show job output
+        run: echo "Job output label is ${{ needs.test.outputs.build_label }}"
