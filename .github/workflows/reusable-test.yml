@@ -2,12 +2,16 @@ name: Reusable Test Workflow
 
 on:
   workflow_call:
+    secrets:
+      demo_token:
+        required: true
     inputs:
       label_prefix:
         description: "Prefix added to the short SHA label"
         required: false
         type: string
         default: "build"
+
     outputs:
       build_label:
         description: "Prefix + short SHA"
