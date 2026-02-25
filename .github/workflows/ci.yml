@@ -66,7 +66,8 @@ jobs:
 
       - name: Compute build label
         id: meta
-        run: echo "label=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "label=$(echo "$GITHUB_SHA" | cut -c1-7)" >> "$GITHUB_OUTPUT"
 
       - name: Verify DB connection target
         run: |
