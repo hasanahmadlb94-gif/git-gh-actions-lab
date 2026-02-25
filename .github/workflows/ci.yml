@@ -46,7 +46,7 @@ jobs:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
         run: pytest -q --junitxml=report.xml
 
-      - name: Optional: run tests in verbose mode (allowed to fail)
+      - name: "Optional: run tests in verbose mode (allowed to fail)"
         continue-on-error: true
         if: github.event_name == 'pull_request'
         run: pytest -vv
