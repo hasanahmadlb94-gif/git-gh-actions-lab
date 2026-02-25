@@ -78,6 +78,11 @@ jobs:
           print(f"DB host={u.hostname} port={u.port} db={u.path.lstrip('/')}")
           PY
 
+      - name: Check service DNS
+        run: |
+          getent hosts postgres || true
+          ping -c 1 postgres || true
+
       - name: Run tests
         run: pytest -q --junitxml=report.xml
 
