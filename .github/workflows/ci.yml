@@ -91,6 +91,12 @@ jobs:
         if: github.event_name == 'pull_request' || inputs.run_optional == 'true'
         run: pytest -vv
 
+      - name: Write event to database (docker action)
+        uses: ./.github/actions/db-writer
+        with:
+          message: "CI run from ${{ github.workflow }} on ${{ github.ref_name }}"
+
+
       - name: Upload test report
         if: always()
         uses: actions/upload-artifact@v4
