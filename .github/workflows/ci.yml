@@ -3,7 +3,19 @@ name: CI
 on:
   push:
     branches: ["main"]
+
   pull_request:
+
+  workflow_dispatch:
+    inputs:
+      run_optional:
+        description: "Run optional verbose tests"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "true"
+          - "false"
 
 jobs:
 
@@ -52,7 +64,7 @@ jobs:
 
       - name: "Optional: run tests in verbose mode (allowed to fail)"
         continue-on-error: true
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' || inputs.run_optional == 'true'
         run: pytest -vv
 
       - name: Upload test report
