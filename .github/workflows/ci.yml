@@ -45,3 +45,10 @@ jobs:
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
         run: pytest -q --junitxml=report.xml
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifcat@v4
+        with:
+          name: junit-report
+          path: report.xml
