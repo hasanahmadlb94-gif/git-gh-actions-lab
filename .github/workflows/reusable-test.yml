@@ -1,0 +1,20 @@
+name: Reusable Test Workflow
+
+on:
+  workflow_call:
+    outputs:
+      build_label:
+        description: "Short SHA label"
+        value: ${{ jobs.test.outputs.build_label }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    outputs:
+      build_label: ${{ steps.meta.outputs.label }}
+
+    steps:
+      - name: Compute build label
+        id: meta
+        run: |
+          echo "label=$(echo "$GITHUB_SHA" | cut -c1-7)" >> "$GITHUB_OUTPUT"
