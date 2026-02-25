@@ -61,7 +61,7 @@ jobs:
       - name: Show masked secret length
         env:
           DEMO_TOKEN: ${{ secrets.DEMO_TOKEN }}
-          run: echo "Secret length is ${#DEMO_TOKEN}"
+        run: echo "Secret length is ${#DEMO_TOKEN}"
 
       - name: Compute build label
         id: meta
