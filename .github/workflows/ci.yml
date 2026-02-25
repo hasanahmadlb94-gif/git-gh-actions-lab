@@ -127,6 +127,8 @@ jobs:
 
   reusable_call:
     uses: ./.github/workflows/reusable-test.yml
+    with:
+      label_prefix: "ci"
 
   use_reusable_output:
     runs-on: ubuntu-latest

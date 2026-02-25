@@ -2,9 +2,15 @@ name: Reusable Test Workflow
 
 on:
   workflow_call:
+    inputs:
+      label_prefix:
+        description: "Prefix added to the short SHA label"
+        required: false
+        type: string
+        default: "build"
     outputs:
       build_label:
-        description: "Short SHA label"
+        description: "Prefix + short SHA"
         value: ${{ jobs.test.outputs.build_label }}
 
 jobs:
@@ -12,9 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       build_label: ${{ steps.meta.outputs.label }}
-
     steps:
       - name: Compute build label
         id: meta
+        shell: bash
         run: |
-          echo "label=$(echo "$GITHUB_SHA" | cut -c1-7)" >> "$GITHUB_OUTPUT"
+          SHORT=$(echo "$GITHUB_SHA" | cut -c1-7)
+          echo "label=${{ inputs.label_prefix }}-$SHORT" >> "$GITHUB_OUTPUT"
