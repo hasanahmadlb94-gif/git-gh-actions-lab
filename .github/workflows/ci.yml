@@ -21,6 +21,8 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    container:
+      image: python:3.13
     env:
       APP_ENV: ci
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/postgres
@@ -32,8 +34,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
-        ports:
-          - 5432:5432
         options: >-
           --health-cmd="pg_isready -U postgres"
           --health-interval=10s
@@ -44,12 +44,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-          cache: "pip"
-          cache-dependency-path: requirements-dev.txt
+      # - name: Set up Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: "3.13"
+      #     cache: "pip"
+      #     cache-dependency-path: requirements-dev.txt
 
       - name: Install dependencies
         run: |
