@@ -64,10 +64,9 @@ jobs:
           DEMO_TOKEN: ${{ secrets.DEMO_TOKEN }}
         run: echo "Secret length is ${#DEMO_TOKEN}"
 
-      - name: Compute build label
+      - name: Compute build label (custom action)
         id: meta
-        run: |
-          echo "label=$(echo "$GITHUB_SHA" | cut -c1-7)" >> "$GITHUB_OUTPUT"
+        uses: ./.github/actions/build-label
 
       - name: Verify DB connection target
         run: |
