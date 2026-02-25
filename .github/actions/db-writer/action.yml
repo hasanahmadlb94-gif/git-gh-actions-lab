@@ -1,0 +1,15 @@
+name: "DB Writer Action"
+description: "Connects to Postgres and inserts a demo row"
+
+inputs:
+  message:
+    description: "Message to insert"
+    required: true
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    DATABASE_URL: ${{ env.DATABASE_URL }}
+  args:
+    - ${{ inputs.message }}
