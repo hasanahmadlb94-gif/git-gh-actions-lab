@@ -44,4 +44,4 @@ jobs:
       - name: Run tests
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
-        run: pytest -q
+        run: pytest -q --junitxml=report.xml
