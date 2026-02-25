@@ -2,7 +2,7 @@ def greet(name: str) -> str:
     name = (name or "").strip()
     if not name:
         name = "world"
-    return f"Hellooooooo, {name}!!!"
+    return f"Hello, {name}!"
 
 def main() -> None:
     import argparse
