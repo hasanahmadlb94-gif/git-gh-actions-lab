@@ -21,7 +21,8 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    APP_ENV: ci
+    env:
+      APP_ENV: ci
 
     services:
       postgres:
@@ -55,7 +56,7 @@ jobs:
           python -m pip install -r requirements-dev.txt
 
       - name: Show env
-        run: echo "APP_ENV=$APP_ENV"
+        run: echo "APP_ENV=$APP_ENV "
 
       - name: Compute build label
         id: meta
