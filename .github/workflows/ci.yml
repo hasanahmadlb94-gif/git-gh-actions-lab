@@ -67,9 +67,21 @@ jobs:
         id: meta
         run: echo "label=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
 
+      - name: Verify DB connection target
+        env:
+          DATABASE_URL: ${{ env.DATABASE_URL }}
+        run: |
+          python - <<'PY'
+          import os
+          from urllib.parse import urlparse
+          dsn = os.environ["DATABASE_URL"]
+          u = urlparse(dsn)
+          print(f"DB host={u.hostname} port={u.port} db={u.path.lstrip('/')}")
+          PY
+
       - name: Run tests
         env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/postgres
         run: pytest -q --junitxml=report.xml
 
       - name: "Optional: run tests in verbose mode (allowed to fail)"
